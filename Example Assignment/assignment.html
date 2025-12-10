@@ -1,0 +1,147 @@
+<h2>Assignment: Intro to Verilog with CircuitVerse – 3-Input AND Gate</h2>
+
+<p><strong>Goal:</strong> In this assignment, you will use the online digital logic simulator 
+<a href="https://circuitverse.org" target="_blank" rel="noopener noreferrer">CircuitVerse</a> to create a 
+3-input AND gate using only the standard <strong>2-input AND gates</strong> available in the editor. 
+You will then export the generated Verilog file and upload it to Canvas, where an automated 
+testbench will verify correctness.</p>
+
+<hr>
+
+<h3>Learning Objectives</h3>
+<ul>
+  <li>Become familiar with CircuitVerse’s logic design environment.</li>
+  <li>Construct a 3-input AND gate using multiple 2-input AND gates.</li>
+  <li>Properly label all inputs and outputs for auto-grading.</li>
+  <li>Export and submit the Verilog representation of your circuit.</li>
+</ul>
+
+<hr>
+
+<h3>Part 1 – Create a CircuitVerse Account and New Project</h3>
+<ol>
+  <li>Go to <a href="https://circuitverse.org" target="_blank" rel="noopener noreferrer">https://circuitverse.org</a>.</li>
+  <li>Create a free account or log in.</li>
+  <li>Click <strong>New Circuit</strong> to start a fresh design.</li>
+  <li>Name the project <strong>three_input_and</strong> or something descriptive.</li>
+</ol>
+
+<hr>
+
+<h3>Part 2 – Build a 3-Input AND Gate Using 2-Input AND Gates</h3>
+<p>Because CircuitVerse only provides 2-input AND gates, you will combine them to create a 3-input AND gate.</p>
+
+<ol>
+  <li>In the CircuitVerse toolbox, add:
+    <ul>
+      <li><strong>Three (3) input pins</strong> – these will be your inputs.</li>
+      <li><strong>Two (2) 2-input AND gates</strong>.</li>
+      <li><strong>One (1) output pin</strong>.</li>
+    </ul>
+  </li>
+
+  <li>Construct the 3-input AND function:
+    <ul>
+      <li>Connect input <strong>a</strong> and <strong>b</strong> to the first AND gate.</li>
+      <li>Connect the <strong>output</strong> of that AND gate into one input of the second AND gate.</li>
+      <li>Connect input <strong>c</strong> to the second input of the second AND gate.</li>
+      <li>Connect the output of the final AND gate to your output pin.</li>
+    </ul>
+  </li>
+
+  <li>Test your design by toggling inputs:
+    <ul>
+      <li>Only when <strong>a = 1</strong>, <strong>b = 1</strong>, and <strong>c = 1</strong> should the output be <strong>1</strong>.</li>
+      <li>All other combinations should yield output <strong>0</strong>.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Part 3 – Label Inputs and Outputs</h3>
+<p><strong>You must use the following exact signal names</strong> for the auto-grader:</p>
+
+<ul>
+  <li><strong>Input 1:</strong> <code>a</code></li>
+  <li><strong>Input 2:</strong> <code>b</code></li>
+  <li><strong>Input 3:</strong> <code>c</code></li>
+  <li><strong>Output:</strong> <code>y</code></li>
+</ul>
+
+<p>To label pins in CircuitVerse:</p>
+<ol>
+  <li>Select each input pin and rename them to <code>a</code>, <code>b</code>, and <code>c</code>.</li>
+  <li>Select the output pin and rename it to <code>y</code>.</li>
+</ol>
+
+<p>Your exported Verilog should follow the same interface:</p>
+
+<pre><code>module and_gate(a, b, c, y);
+    input  a;
+    input  b;
+    input  c;
+    output y;
+
+    assign y = a & b & c;
+endmodule
+</code></pre>
+
+<p><strong>Important:</strong> Your module name must be <code>and_gate</code> and the ports must be named 
+<code>a</code>, <code>b</code>, <code>c</code>, and <code>y</code>. The auto-grader depends on these exact names.</p>
+
+<hr>
+
+<h3>Part 4 – Export Verilog from CircuitVerse</h3>
+<ol>
+  <li>Open the project menu inside CircuitVerse.</li>
+  <li>Select <strong>Export</strong> → <strong>Verilog</strong>.</li>
+  <li>Download the generated Verilog file.</li>
+  <li>Rename the file to <strong><code>and_gate.v</code></strong> before uploading.</li>
+  <li>Open the file and verify:
+    <ul>
+      <li>Top-level module is named <code>and_gate</code>.</li>
+      <li>Ports are <code>a</code>, <code>b</code>, <code>c</code>, and <code>y</code>.</li>
+      <li>The functionality correctly implements a 3-input AND.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Part 5 – Automated Testbench &amp; Grading</h3>
+<p>An automated testbench will evaluate your design by applying all eight possible input combinations:</p>
+
+<ul>
+  <li>000 → 0</li>
+  <li>001 → 0</li>
+  <li>010 → 0</li>
+  <li>011 → 0</li>
+  <li>100 → 0</li>
+  <li>101 → 0</li>
+  <li>110 → 0</li>
+  <li>111 → 1</li>
+</ul>
+
+<p>Your submission must compile cleanly and produce the correct results during simulation.</p>
+
+<hr>
+
+<h3>What to Submit on Canvas</h3>
+<ol>
+  <li>Your Verilog file named <strong><code>and_gate.v</code></strong>.</li>
+  <li>The module inside must be named <strong><code>and_gate</code></strong> with ports 
+      <strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>c</code></strong>, and <strong><code>y</code></strong>.</li>
+</ol>
+
+<hr>
+
+<h3>Tips &amp; Common Issues</h3>
+<ul>
+  <li><strong>Spelling matters!</strong> Wrong port names will cause auto-grading to fail.</li>
+  <li><strong>Use exactly two AND gates.</strong> Do not use gates other than 2-input AND gates.</li>
+  <li><strong>Confirm labels.</strong> If your input pins are still named “In1” or similar, fix them before exporting.</li>
+  <li><strong>Only one module.</strong> Ensure your Verilog file contains a single top-level module.</li>
+</ul>
+
+<p>Once finished, upload <code>and_gate.v</code> to Canvas to be graded automatically.</p>
