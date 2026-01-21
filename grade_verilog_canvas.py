@@ -168,16 +168,16 @@ def grade_submission_with_iverilog(
         comment = f"Simulation failed:\n{str(e)}"
         return 0.0, comment
 
-    # 4) Parse RESULT lines
+    # 4) Parse test result lines (marked with [PASS] or [FAIL])
     results = []
     for line in sim_stdout.splitlines():
-        if line.startswith("RESULT:"):
+        if "[PASS]" in line or "[FAIL]" in line:
             results.append(line.strip())
 
     if not results:
         # No structured results; include raw stdout to help debug
         comment = (
-            "No RESULT lines found in simulation output.\n\n"
+            "No test results found in simulation output (looking for [PASS] or [FAIL] markers).\n\n"
             "Raw simulation output:\n"
             + sim_stdout
         )
@@ -189,7 +189,7 @@ def grade_submission_with_iverilog(
     for r in results:
         total += 1
         details_lines.append(r)
-        if re.search(r"\bPASS\b", r):
+        if "[PASS]" in r:
             passed += 1
 
     fraction = passed / total if total > 0 else 0.0
@@ -366,15 +366,20 @@ def main():
                 # top_module=None  # optional, default is None
             )
 
-            # Post grade + comment back to Canvas
+            # Display results in terminal
             print(f"    -> Score: {score:.2f} / {points_possible}")
+            print(f"    -> Feedback:\n{comment}")
+            print()
+
+            # Post grade + comment back to Canvas
             try:
                 post_grade_to_canvas(
                     BASE_URL, COURSE_ID, assignment_id, student_id, score, CANVAS_API_KEY
                 )
-                #post_submission_comment(
-                #    BASE_URL, CANVAS_API_KEY, COURSE_ID, assignment_id, student_id, comment
-                #)
+                post_submission_comment(
+                    BASE_URL, CANVAS_API_KEY, COURSE_ID, assignment_id, student_id, comment
+                )
+                print(f"    ✓ Grade and feedback posted to Canvas")
             except Exception as e:
                 print(f"    Error posting grade/comment for {student_name}: {e}")
 

@@ -172,13 +172,13 @@ def post_grade_to_canvas(base_url, course_id, assignment_id, student_id, score, 
 
 def post_submission_comment(base_url, token, course_id, assignment_id, user_id, comment):
     headers = {'Authorization': 'Bearer ' + token}
-    url = f'{base_url}/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id}/comments'
+    url = f'{base_url}courses/{course_id}/assignments/{assignment_id}/submissions/{user_id}/comments'
     payload = {'comment[text_comment]': comment}
     response = requests.post(url, headers=headers, data=payload)
     if response.ok:
         return True
     else:
-        print(response.content)
+        print(f"Error posting comment: {response.status_code} - {response.reason}")
         return False
 
 def extract_percentage(string_with_percentage):
