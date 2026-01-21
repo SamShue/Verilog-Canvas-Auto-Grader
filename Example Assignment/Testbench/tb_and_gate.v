@@ -9,7 +9,7 @@ module tb_and_gate;
     wire y;
 
     // Instantiate the Unit Under Test (UUT)
-    and_gate uut (
+    Main uut (
         .a(a),
         .b(b),
         .c(c),

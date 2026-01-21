@@ -1,4 +1,4 @@
-module and_gate(a, b, c, y);
+module Main(a, b, c, y);
     input  a;
     input  b;
     input  c;
